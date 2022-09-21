@@ -10,5 +10,7 @@ export default MainColors = {
     LightSalmon: "#FFA07A",
     Indigo: "#4B0082",
     Gray: "#808080",
-    Peru: "#CD853F"
+    Peru: "#CD853F",
+    White: "#FFFFFF",
+    Black: "#171717",
 };
