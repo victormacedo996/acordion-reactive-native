@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import { View, TouchableOpacity, ScrollView, Text, FlatList, StyleSheet, LayoutAnimation, Platform, UIManager} from "react-native";
-import { Button } from 'react-native-paper';
 import Icon from "react-native-vector-icons/MaterialIcons";
 import MainColors from '../colors';
-import Tag from '../tag/Tag';
+import Tag from '../tag';
 
 export default class Accordian extends Component{
 
@@ -26,8 +25,11 @@ export default class Accordian extends Component{
             <ScrollView>
                 <TouchableOpacity style={styles.row} onPress={()=>this.toggleExpand()}>
                     <Text style={[styles.title]}>{this.props.title}</Text>
-                    <Tag/>
-                    <Icon name={this.state.expanded ? 'keyboard-arrow-up' : 'keyboard-arrow-down'} size={30} color="gray" />
+                    {this.props.tag == true &&
+                        <Tag tag={this.props.tag_name}/>
+                    }
+                    
+                    <Icon name={this.state.expanded ? 'keyboard-arrow-up' : 'keyboard-arrow-down'} size={30} color="black" />
                    
                 </TouchableOpacity>
                 <View style={styles.parentHr}/>
@@ -37,7 +39,7 @@ export default class Accordian extends Component{
                         <FlatList
                         data={this.state.data}
                         numColumns={1}
-                        scrollEnabled={false}
+                        scrollEnabled={true}
                         renderItem={({item, index}) => 
                             <View>
                                 <TouchableOpacity style={[styles.childRow, styles.button, item.value ? styles.btnActive : styles.btnInActive]} onPress={()=>this.onClick(index)}>

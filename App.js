@@ -11,19 +11,23 @@ export default class App extends Component {
       menu :[
         { 
           title: 'Non Veg Biryanis', 
-          data: ['Biryani also known as biriyani', 'biriani, birani or briyani']
+          data: ['Biryani also known as biriyani', 'biriani, birani or briyani'],
+          tag_name: "Dale"
         },
         { 
           title: 'Pizzas',
-          data: ['Pizza is a savory dish of Italian origin', 'consisting of a usually round']
+          data: ['Pizza is a savory dish of Italian origin', 'consisting of a usually round'],
+          tag_name: "Dele"
         },
         { 
          title: 'Drinks',
-         data: ['A drink (or beverage) is a liquid intended for human consumption', 'In addition to their basic function']
+         data: ['A drink (or beverage) is a liquid intended for human consumption', 'In addition to their basic function'],
+         tag_name: "Doly"
         },
         { 
           title: 'Deserts',
-          data: ['A dessert is typically the sweet course that concludes', 'a meal in the culture of many countries']
+          data: ['A dessert is typically the sweet course that concludes', 'a meal in the culture of many countries'],
+          tag_name: "TAG"
         },
       ]
      }
@@ -46,6 +50,8 @@ export default class App extends Component {
                 key={id}
                 title = {item.title}
                 data = {item.data}
+                tag = {true}
+                tag_name = {item.tag_name}
             />
         );
     }
