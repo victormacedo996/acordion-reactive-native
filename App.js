@@ -12,22 +12,22 @@ export default class App extends Component {
         { 
           title: 'Non Veg Biryanis', 
           data: ['Biryani also known as biriyani', 'biriani, birani or briyani'],
-          tag_name: "Dale"
+          tag_name: ["Dale", "teste"]
         },
         { 
           title: 'Pizzas',
           data: ['Pizza is a savory dish of Italian origin', 'consisting of a usually round'],
-          tag_name: "Dele"
+          tag_name: ["Dele"]
         },
         { 
          title: 'Drinks',
          data: ['A drink (or beverage) is a liquid intended for human consumption', 'In addition to their basic function'],
-         tag_name: "Doly"
+         tag_name: ["Doly"]
         },
         { 
           title: 'Deserts',
           data: ['A dessert is typically the sweet course that concludes', 'a meal in the culture of many countries'],
-          tag_name: "TAG"
+          tag_name: ["TAG"]
         },
       ]
      }
@@ -44,7 +44,7 @@ export default class App extends Component {
   renderAccordians=()=> {
     const items = [];
     for (item of this.state.menu) {
-      var id = Math.random().toString(16).slice(2)
+      var id = Math.random().toString(16).slice(2);
         items.push(
             <Accordian
                 key={id}

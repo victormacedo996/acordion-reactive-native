@@ -11,6 +11,7 @@ export default class Accordian extends Component{
         this.state = { 
           data: props.data,
           expanded : false,
+          outside_tags: props.tag_name.slice(0, 2)
         }
 
         if (Platform.OS === 'android') {
@@ -22,11 +23,13 @@ export default class Accordian extends Component{
 
     return (
         <View>
-            <ScrollView>
                 <TouchableOpacity style={styles.row} onPress={()=>this.toggleExpand()}>
                     <Text style={[styles.title]}>{this.props.title}</Text>
                     {this.props.tag == true &&
-                        <Tag tag={this.props.tag_name}/>
+                        this.state.outside_tags.map((item) => {
+                            var id = Math.random().toString(16).slice(2);
+                            return <Tag key={id} tag={item}/>
+                        })
                     }
                     
                     <Icon name={this.state.expanded ? 'keyboard-arrow-up' : 'keyboard-arrow-down'} size={30} color="black" />
@@ -35,24 +38,23 @@ export default class Accordian extends Component{
                 <View style={styles.parentHr}/>
                 {
                     this.state.expanded &&
-                    <View style={{}}>
+                    <View>
                         <FlatList
                         data={this.state.data}
                         numColumns={1}
-                        scrollEnabled={true}
                         renderItem={({item, index}) => 
                             <View>
                                 <TouchableOpacity style={[styles.childRow, styles.button, item.value ? styles.btnActive : styles.btnInActive]} onPress={()=>this.onClick(index)}>
-                                    {this.state.data.map((item) => {
-                                        <Text style={[styles.title, styles.itemInActive]} >{{item}}</Text>
-                                    })}
+                                        <Text style={[styles.content, styles.itemInActive]} >
+                                            {item}
+                                        </Text>
                                 </TouchableOpacity>
                                 <View style={styles.childHr}/>
                             </View>
-                        }/>
+                        }
+                        />
                     </View>
                 }
-            </ScrollView>
         </View>
     )
   }
@@ -84,7 +86,7 @@ const styles = StyleSheet.create({
         fontSize: 12,
     },
     title:{
-        fontSize: 14,
+        fontSize: 20,
         fontWeight:'bold',
         color: MainColors.Indigo,
     },
@@ -136,5 +138,10 @@ const styles = StyleSheet.create({
     border: {
         borderRadius: 150,
     },
+    content: {
+        fontSize: 20,
+        fontWeight:'bold',
+        color: "red",
+    }
     
 });
