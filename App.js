@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { StyleSheet, View} from 'react-native';
-import Accordian from './components/acordion'
+import Accordian from './components/acordion_uc'
 import MainColors from './components/colors/index'
 
 export default class App extends Component {
