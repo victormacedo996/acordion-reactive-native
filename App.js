@@ -50,7 +50,6 @@ export default class App extends Component {
                 key={id}
                 title = {item.title}
                 data = {item.data}
-                tag = {true}
                 tag_name = {item.tag_name}
             />
         );

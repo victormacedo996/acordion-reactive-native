@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import { View, TouchableOpacity, Text, FlatList, StyleSheet, LayoutAnimation, Platform, UIManager  } from "react-native";
+import { View, TouchableOpacity, Text, FlatList, StyleSheet, LayoutAnimation, Platform, UIManager, TouchableHighlight} from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import MainColors from '../colors';
-import Tag from '../tag';
 
 export default class Accordian extends Component{
 
@@ -18,6 +17,11 @@ export default class Accordian extends Component{
             UIManager.setLayoutAnimationEnabledExperimental(true);
         }
     }
+
+    onPress(){
+        // TODO: fazer o comportamento para levar para a página esperada
+        console.log("teste");
+    }
   
   render() {
 
@@ -25,17 +29,11 @@ export default class Accordian extends Component{
         <View>
                 <TouchableOpacity style={styles.row} onPress={()=>this.toggleExpand()}>
                     <Text style={[styles.title]}>{this.props.title}</Text>
-                    {
-                        this.state.outside_tags.map((item) => {
-                            var id = Math.random().toString(16).slice(2);
-                            return <Tag key={id} tag={item}/>
-                        })
-                    }
+                    
                     <Icon name={this.state.expanded ? 'keyboard-arrow-up' : 'keyboard-arrow-down'} size={30} color="black" />
                    
                 </TouchableOpacity>
                 <View style={styles.parentHr}/>
-                
                 {
                     this.state.expanded &&
                     <View>
@@ -44,16 +42,12 @@ export default class Accordian extends Component{
                         numColumns={1}
                         renderItem={({item, index}) => 
                             <View>
-                                {index == 0 && 
-                                    this.state.outside_tags.map((item) => {
-                                        var id = Math.random().toString(16).slice(2);
-                                        return <Tag key={id} tag={item} style={styles.insideTags}/>
-                                    })
-                                }
                                 <TouchableOpacity style={[styles.childRow, styles.button, item.value ? styles.btnActive : styles.btnInActive]} onPress={()=>this.onClick(index)}>
+                                    <TouchableHighlight onPress={this.onPress}>
                                         <Text style={[styles.content, styles.itemInActive]} >
                                             {item}
                                         </Text>
+                                    </TouchableHighlight>
                                 </TouchableOpacity>
                                 <View style={styles.childHr}/>
                             </View>
@@ -148,9 +142,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight:'bold',
         color: "red",
-    },
-    insideTags: {
-        color: "yellow"
     }
     
 });
