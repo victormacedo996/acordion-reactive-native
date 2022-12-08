@@ -27,9 +27,9 @@ const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 3,
-    paddingHorizontal: 3,
-    borderRadius: 10,
+    paddingVertical: 6,
+    paddingHorizontal: 6,
+    borderRadius: 12,
     elevation: 1,
     backgroundColor: MainColors.Indigo,
   },
