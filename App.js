@@ -1,61 +1,45 @@
-import React, {Component} from 'react';
+import React, {Component, useState, useEffect } from 'react';
 import { StyleSheet, View} from 'react-native';
 import Accordian from './components/acordion_uc'
 import MainColors from './components/colors/index'
 
-export default class App extends Component {
+export default function App() {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      menu :[
-        { 
-          title: 'Non Veg Biryanis', 
-          data: ['Biryani also known as biriyani', 'biriani, birani or briyani'],
-          tag_name: ["Dale", "teste"]
-        },
-        { 
-          title: 'Pizzas',
-          data: ['Pizza is a savory dish of Italian origin', 'consisting of a usually round'],
-          tag_name: ["Dele"]
-        },
-        { 
-         title: 'Drinks',
-         data: ['A drink (or beverage) is a liquid intended for human consumption', 'In addition to their basic function'],
-         tag_name: ["Doly"]
-        },
-        { 
-          title: 'Deserts',
-          data: ['A dessert is typically the sweet course that concludes', 'a meal in the culture of many countries'],
-          tag_name: ["TAG"]
-        },
-      ]
-     }
+  const [uc, setUc] = useState([])
+
+  async function fetchUserUC () {
+    const resp = await fetch(`http://academico3.rj.senac.br:8080/api/UnidadeCurricular/filterByUsuarioId/3b700ecc-cec9-4be4-8c00-48bced543861/1`).then(res => res.json()).catch(err => err)
+    console.log(resp)
+    setUc(resp)
   }
 
-  render() {
-    return (
-      <View style={styles.container}>
-        { this.renderAccordians() }
-      </View>
-    );
-  }
-
-  renderAccordians=()=> {
+  useEffect(() => {
+    fetchUserUC()
+  }, [])
+  
+  
+  function renderAccordians () {
     const items = [];
-    for (item of this.state.menu) {
-      var id = Math.random().toString(16).slice(2);
+    for (let item of uc) {
+      var id = Math.random().toString(16).slice(2)
         items.push(
             <Accordian
                 key={id}
-                title = {item.title}
-                data = {item.data}
-                tag_name = {item.tag_name}
+                title = {item.nomeCurto}
+                data = {["dale", "dele", "doly"]}
+                tag = {true}
+                tag_name = {["tag1", "tag2"]}
             />
         );
     }
     return items;
-}
+  }
+
+  return (
+        <View style={styles.container}>
+          { renderAccordians() }
+        </View>
+  )
 }
 
 const styles = StyleSheet.create({

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { View, TouchableOpacity, Text, FlatList, StyleSheet, LayoutAnimation, Platform, UIManager, TouchableHighlight} from "react-native";
+import { View, TouchableOpacity, ScrollView, Text, List, FlatList, StyleSheet, LayoutAnimation, Platform, UIManager} from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import MainColors from '../colors';
 
@@ -10,7 +10,7 @@ export default class Accordian extends Component{
         this.state = { 
           data: props.data,
           expanded : false,
-          outside_tags: props.tag_name.slice(0, 2)
+          tags_outside: props.tag_name.slice(0,2),
         }
 
         if (Platform.OS === 'android') {
@@ -29,7 +29,11 @@ export default class Accordian extends Component{
         <View>
                 <TouchableOpacity style={styles.row} onPress={()=>this.toggleExpand()}>
                     <Text style={[styles.title]}>{this.props.title}</Text>
-                    
+                
+                    {this.props.tag == true && this.state.tags_outside.map((item) => {
+                         return   <Tag tag={item}/>    
+                    })}
+
                     <Icon name={this.state.expanded ? 'keyboard-arrow-up' : 'keyboard-arrow-down'} size={30} color="black" />
                    
                 </TouchableOpacity>
@@ -43,11 +47,7 @@ export default class Accordian extends Component{
                         renderItem={({item, index}) => 
                             <View>
                                 <TouchableOpacity style={[styles.childRow, styles.button, item.value ? styles.btnActive : styles.btnInActive]} onPress={()=>this.onClick(index)}>
-                                    <TouchableHighlight onPress={this.onPress}>
-                                        <Text style={[styles.content, styles.itemInActive]} >
-                                            {item}
-                                        </Text>
-                                    </TouchableHighlight>
+                                    <Text style={[styles.content, styles.itemActive]}>{item}</Text>
                                 </TouchableOpacity>
                                 <View style={styles.childHr}/>
                             </View>
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
         fontSize: 12,
     },
     title:{
-        fontSize: 20,
+        fontSize: 16,
         fontWeight:'bold',
         color: MainColors.Indigo,
     },
