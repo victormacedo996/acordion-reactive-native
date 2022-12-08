@@ -8,7 +8,9 @@ export default function App() {
   const [uc, setUc] = useState([])
 
   async function fetchUserUC () {
-    const resp = await fetch(`http://academico3.rj.senac.br:8080/api/UnidadeCurricular/filterByUsuarioId/3b700ecc-cec9-4be4-8c00-48bced543861/1`).then(res => res.json()).catch(err => err)
+    const resp = await fetch(`http://academico3.rj.senac.br:8080/api/UnidadeCurricular/filterByUsuarioId/3b700ecc-cec9-4be4-8c00-48bced543861/1`)
+      .then(res => res.json())
+      .catch(err => err)
     console.log(resp)
     setUc(resp)
   }
