@@ -27,7 +27,7 @@ export default class Accordian extends Component{
                     <Text style={[styles.title]}>{this.props.title}</Text>
                 
                     {this.props.tag == true && this.state.tags_outside.map((item) => {
-                         return   <Tag tag={item}/>        
+                         return   <Tag tag={item}/>    
                     })}
 
                     <Icon name={this.state.expanded ? 'keyboard-arrow-up' : 'keyboard-arrow-down'} size={30} color="black" />
